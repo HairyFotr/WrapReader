@@ -4,16 +4,16 @@ Note: you may have to edit the device name in WrapReader.cpp to another hidraw.
 
 Usage:
 for reading from the tracker: 
-	./run
+    ./run
 this also creates .txt and .png data in the graphs folder
 
 .txt data can be replayed with:
-	python Graph.py < graphs/data.txt
+    python Graph.py < graphs/data.txt
 and .png images recreated with:
-	python Graph.py -png < graphs/data.txt
+    python Graph.py -png < graphs/data.txt
 
 Requirements:
-	gcc
-	python
-	python-pygame
-	scrot
+    gcc
+    python
+    python-pygame
+    scrot

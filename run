@@ -1,5 +1,9 @@
 #!/bin/bash
 
-dev="/dev/hidraw0"
+if [ -z "$1" ]; then
+	dev="/dev/hidraw0"
+else
+	dev="$1"
+fi
 
 g++ WrapReader.cpp -o WrapReader && sudo chmod +r $dev && ./WrapReader $dev | python -u Graph.py -txt -png > graphs/`date +%s`.txt

@@ -21,12 +21,12 @@ white, gray, black = Color(255,255,255), Color(70,70,70), Color(0,0,0)
 
 # Funcs
 def screenshot():
-	os.system("scrot --focused graphs/"+str(int(time.time()))+".png")
-	#pg.image.save(pg.display.get_surface(), "graphs/"+str(int(time.time()))+".png")
-	
+    os.system("scrot --focused graphs/"+str(int(time.time()))+".png")
+    #pg.image.save(pg.display.get_surface(), "graphs/"+str(int(time.time()))+".png")
+    
 def exit():
-	if PNG: screenshot()
-	sys.exit()
+    if PNG: screenshot()
+    sys.exit()
 
 maxdata, data, mindata = [-5000]*dataLen, [0]*dataLen, [+5000]*dataLen
 skip = 5
