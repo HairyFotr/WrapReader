@@ -1,15 +1,15 @@
 A reader and graphic display of the data from the Vuzix Wrap 920AR tracker.
 
 Usage:
-    for reading from the tracker: 
-        ./run
-    this also creates .txt and .png data in the graphs folder
-    by default it reads from /dev/hidraw0, but can also accept a device name as an argument
+    For reading and graphing from the tracker (or a direct dump):
+        ./run <filename>
+    This also creates .txt and .png data in the graphs folder.
+    If no <filename> is given, it reads from /dev/hidraw0.
     
-    graphs of .txt data can be replayed with:
-        python Graph.py < graphs/data.txt
+    Graphs of .txt data can be replayed with:
+        python Graph.py < graphs/<filename>.txt
     and .png images recreated with:
-        python Graph.py -png < graphs/data.txt
+        python Graph.py -png < graphs/<filename>.txt
 
 Requirements:
     gcc

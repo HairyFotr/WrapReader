@@ -6,4 +6,4 @@ else
 	dev="$1"
 fi
 
-g++ WrapReader.cpp -o WrapReader && sudo chmod +r $dev && ./WrapReader $dev | python -u Graph.py -txt -png > graphs/`date +%s`.txt
+g++ WrapReader.cpp -lrt -o WrapReader && if [ ! -r $dev ]; then sudo chmod +r $dev; fi && ./WrapReader $dev | python -u Graph.py -txt -png > graphs/`date +%s`.txt

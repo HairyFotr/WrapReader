@@ -8,12 +8,24 @@ from pygame.locals import *
 TXT = ("-txt" in sys.argv)
 PNG = ("-png" in sys.argv)
 
-# Pygame init
+# Consts and init
 dataLen = 12
 margin = 50
 (width, height) = (1000, 700)
 sep = (width-2*margin)/(dataLen-1)
 
+maxdata, data, mindata = [-50000]*dataLen, [0]*dataLen, [+50000]*dataLen
+top = 200   # Room for axis graphs
+skip = 5    # Skip frames
+skipcnt = 1 #
+lines = []
+cnt = top
+
+#offsets=[113, -377, 11, 59, 185, 1, -42, 215, -11, 239, -236, 256]
+offsets=[0]*dataLen
+multi=[3,1,2,1]
+
+# Pygame init
 pg.init()
 window = pg.display.set_mode((width,height), RESIZABLE)
 pg.display.set_caption("Graph")
@@ -29,16 +41,6 @@ def screenshot():
 def exit():
     if PNG: screenshot()
     sys.exit()
-
-maxdata, data, mindata = [-50000]*dataLen, [0]*dataLen, [+50000]*dataLen
-skip = 4
-skipcnt = 1
-lines = []
-top = 200
-cnt = top
-
-# Offsets gathered empirically... (maxdata+mindata)/2
-offsets=[113, -377, 11, 59, 185, 1, -42, 215, -11, 239, -236, 256]
 
 while True:
     # Handle events
@@ -64,7 +66,7 @@ while True:
     exdata = list(data)
     data = [int(s) for s in read.split(" ")[1:]]
 
-    # Clear lines
+    # Clear old lines
     clear = 10
     pg.draw.line(window, black, (0,cnt-1+clear/2),(width,cnt-1+clear/2), clear)
     for _,v1,v2 in lines: pg.draw.line(window, black, v1, v2, 1)
@@ -77,10 +79,7 @@ while True:
         if i<6: data[i] += offsets[i]
 
         # Multiply
-        multi = 1
-        if i/3 == 0: multi = 4
-        if i/3 == 2: multi = 2
-        data[i] *= multi
+        data[i] *= multi[i/3]
 
     # Draw data lines
     for i in range(len(data)):
@@ -90,11 +89,11 @@ while True:
             (xorigin + (width/1000.0)*(data[i]/50.0), cnt))
         pg.draw.line(window, colors[i/3], (xorigin,top-5),(xorigin,height), 1)
 
-    # Axis lines
+    # Draw axis lines
     lines = []
     for i in range(4):
         xx, yy = margin+sep+sep*i*3, 100
-        div = 10
+        div = 15
         lines += [
             (colors[0], (xx,yy), (xx+data[0+i*3]/div,yy+data[1+i*3]/div)),
             (colors[1], (xx,yy), (xx+data[1+i*3]/div,yy+data[2+i*3]/div)),
