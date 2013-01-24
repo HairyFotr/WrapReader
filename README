@@ -16,3 +16,7 @@ Requirements:
     python
     python-pygame
     scrot
+
+For two projects using this reader + a yaw/pitch/roll calculator, see:
+    https://github.com/HairyFotr/Lumen
+    https://github.com/HairyFotr/SocNetAnal
